@@ -36,8 +36,6 @@ LogLevel := 3                                                   ; 0) OFF, 1) ERR
   ; Parse command line
   NeedAdmin := ParseCommandLine(A_Args, &LogLevel)
 
-  ; LogError("LogLevel = " . LogLevel . ", A_IsAdmin = " . A_IsAdmin . ", NeedAdmin = " . NeedAdmin)
-
   ; If we are required to run elevated and we are not already, we restart
   if (!A_IsAdmin && NeedAdmin) {
     RestartAsAdministrator(A_Args)
@@ -79,7 +77,7 @@ LogLevel := 3                                                   ; 0) OFF, 1) ERR
 #0:: WindowsRestore()                                           ; <Win> + 0
 #+0:: WindowsCapture()                                          ; <Win> + <Shift> + 0
 #F12:: ModernStandby()                                          ; <Win> + <F12>
-^+4:: SendInput("€")                                            ; <Ctrl> + <Shift> + 4
+^+4:: Send("€")                                                 ; <Ctrl> + <Shift> + 4
 
 #HotIf MouseIsOver("ahk_class Shell_TrayWnd")
 WheelUp:: Send("{Volume_Up}")
@@ -90,7 +88,7 @@ WheelDown:: Send("{Volume_Down}")
 ; Functions                                                                    ;
 ;------------------------------------------------------------------------------;
 
-Log(level, msg)
+LogMsg(level, msg)
 {
   global LogName, LogLevel
   static id := ["ERROR: ", " WARN: ", " INFO: ", "DEBUG: ", "TRACE: "]
@@ -104,27 +102,27 @@ Log(level, msg)
   
 LogError(msg)
 {
-  Log(1, msg)
+  LogMsg(1, msg)
 }
 
 LogWarning(msg)
 { 
-  Log(2, msg)
+  LogMsg(2, msg)
 }
 
 LogInfo(msg)
 { 
-  Log(3, msg)
+  LogMsg(3, msg)
 }
 
 LogDebug(msg)
 {
-  Log(4, msg)
+  LogMsg(4, msg)
 }
 
 LogTrace(msg)
 {
-  Log(5, msg)
+  LogMsg(5, msg)
 }
 
 ;-------------------------------------------------------------------------------
