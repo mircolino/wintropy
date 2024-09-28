@@ -14,7 +14,7 @@
 ;------------------------------------------------------------------------------;
 
 AppName := StrSplit(A_Scriptname, ".")[1]
-AppVersion := "2.4.11"
+AppVersion := "2.4.12"
 IconName := A_IsCompiled? (AppName . ".exe"): (AppName . ".ico")
 IniName := AppName . ".ini"
 
