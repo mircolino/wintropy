@@ -14,7 +14,7 @@
 ;------------------------------------------------------------------------------;
 
 AppName := StrSplit(A_Scriptname, ".")[1]
-AppVersion := "2.4.10"
+AppVersion := "2.4.11"
 IconName := A_IsCompiled? (AppName . ".exe"): (AppName . ".ico")
 IniName := AppName . ".ini"
 
@@ -79,11 +79,6 @@ LogLevel := 3                                                   ; 0) OFF, 1) ERR
 #F12:: ModernStandby()                                          ; <Win> + <F12>
 ^+4:: Send("€")                                                 ; <Ctrl> + <Shift> + 4
 
-#HotIf MouseIsOver("ahk_class Shell_TrayWnd")
-WheelUp:: Send("{Volume_Up}")
-MButton:: Send("{Volume_Mute}")
-WheelDown:: Send("{Volume_Down}")
-
 ;------------------------------------------------------------------------------;
 ; Functions                                                                    ;
 ;------------------------------------------------------------------------------;
@@ -123,14 +118,6 @@ LogDebug(msg)
 LogTrace(msg)
 {
   LogMsg(5, msg)
-}
-
-;-------------------------------------------------------------------------------
-
-MouseIsOver(winTitle)
-{
-  MouseGetPos(,, &winId)
-  return (WinExist(winTitle " ahk_id " winId))
 }
 
 ;-------------------------------------------------------------------------------
